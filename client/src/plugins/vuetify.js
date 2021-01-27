@@ -9,7 +9,9 @@ export default new Vuetify({
             light: {
                 primary: "#FFF2CC",
                 secondary: "#819C4B",
-                footer: "#292929"
+                footer: "#292929",
+                background: '#F2F4F8',
+                other: '#fafafa'
             }
         }
     }

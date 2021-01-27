@@ -40,7 +40,7 @@ const routes = [
     component: () => import("@/views/login.vue"),
     meta: {
       auth: false,
-      navbar: true
+      navbar: false
     }
   },
   {
