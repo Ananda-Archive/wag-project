@@ -17,7 +17,26 @@
             <v-btn icon><v-icon>mdi-account</v-icon></v-btn>
         </v-app-bar>
         <!-- Admin -->
-        
+        <v-app-bar app class="absolute px-5" flat color="secondary" v-if="this.$route.meta.auth && this.$route.meta.navbar && $vuetify.breakpoint.smAndDown"></v-app-bar>
+        <v-navigation-drawer app dark v-model="drawer" v-if="this.$route.meta.auth && this.$route.meta.navbar">
+            <v-layout justify-space-between column fill-height>
+                <div>
+                    <template>
+                        <v-list-item class="my-2">
+                            <v-list-item-avatar size="60"><img src="https://image.flaticon.com/icons/svg/194/194938.svg" alt=""></v-list-item-avatar>
+                            <v-list-item-content><v-list-item-title>Admin</v-list-item-title></v-list-item-content>
+                        </v-list-item>
+                    </template>
+                    <v-divider></v-divider>
+                    <v-list dense>
+                        <v-list-item link @click="goTo('/admproduct')">
+                            <v-list-item-icon><v-icon :class="[this.$route.name=='admProduct' ? 'secondary--text' : '']">mdi-cube-outline</v-icon></v-list-item-icon>
+                            <v-list-item-title :class="[this.$route.name=='admProduct' ? 'secondary--text' : '']">Produk</v-list-item-title>
+                        </v-list-item>
+                    </v-list>
+                </div>
+            </v-layout>
+        </v-navigation-drawer>
     </div>
 </template>
 
@@ -28,7 +47,8 @@
 export default {
     data() {
         return {
-            searchOverlay: false
+            searchOverlay: false,
+            drawer: null
         }
     },
 
