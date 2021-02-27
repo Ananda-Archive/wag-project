@@ -1,8 +1,12 @@
 <template>
     <v-main>
-        <v-container fluid  class="pt-16 px-md-16">
+        <v-container fluid  class="pt-md-16 pt-10 px-md-16">
             <v-row justify-center>
                 <v-col cols="12">
+                    <div v-if="this.$vuetify.breakpoint.smAndDown">
+                        <h1 class="font-weight-regular mb-4">Self Discovery</h1>
+                        <v-divider class="mb-8"></v-divider>
+                    </div>
                     <v-row no-gutters>
                         <v-col cols="12" md="4" v-for="(item,idx) in selfDiscoveries" :key="idx" class="pb-8" :class="[$vuetify.breakpoint.smAndDown? null : 'pr-6']">
                             <v-card width="600px" align="left" @click="goTo('/selfdiscovery/'+item.id)">

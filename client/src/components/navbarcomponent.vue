@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-app-bar dark app class="absolute px-5" flat color="footer" v-if="!this.$route.meta.auth && this.$route.meta.navbar">
+        <v-app-bar dark app class="absolute px-5" flat color="footer" v-if="!this.$route.meta.auth && this.$route.meta.navbar && !this.$vuetify.breakpoint.smAndDown">
             <v-btn x-large icon  @click="goTo('/')"><v-img src="@/assets/wag_logo.png" contain width="90"></v-img></v-btn>
             <v-btn disabled></v-btn>
             <v-btn disabled></v-btn>
@@ -35,8 +35,58 @@
                 </v-list>
             </v-menu>
         </v-app-bar>
+        <v-app-bar v-else dark app class="absolute" flat color="footer" >
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer"/>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="goTo('/')"><v-img src="@/assets/wag_logo.png" contain width="80" class="mr-10"></v-img></v-btn>
+        </v-app-bar>
+        <v-navigation-drawer app dark v-model="drawer">
+            <v-list dense>
+                <v-list-item link @click="goTo('/')">
+                    <v-list-item-icon><v-icon>mdi-home</v-icon></v-list-item-icon>
+                    <v-list-item-title>Home</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="goTo('/about')">
+                    <v-list-item-icon><v-icon>mdi-account-group</v-icon></v-list-item-icon>
+                    <v-list-item-title>About</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="goTo('/checkmeout')">
+                    <v-list-item-icon><v-icon>mdi-shopping-outline</v-icon></v-list-item-icon>
+                    <v-list-item-title>Check Me Out</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="goTo('/selfdiscovery')">
+                    <v-list-item-icon><v-icon>mdi-newspaper-variant-outline</v-icon></v-list-item-icon>
+                    <v-list-item-title>Self Discovery</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="goTo('/glammersay')">
+                    <v-list-item-icon><v-icon>mdi-account-star</v-icon></v-list-item-icon>
+                    <v-list-item-title>Glammers Say</v-list-item-title>
+                </v-list-item>
+                <v-divider class="my-4"></v-divider>
+                <v-list-item link @click="cart = !cart">
+                    <v-list-item-icon>
+                        <v-badge :color="products.length>0?'red':'transparent'" :content="products.length" offset-x="10" offset-y="10" small>
+                            <v-icon>mdi-cart</v-icon>
+                        </v-badge>
+                    </v-list-item-icon>
+                    <v-list-item-title>My Cart</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="loginDialog = !loginDialog" v-if="id==null">
+                    <v-list-item-icon><v-icon>mdi-account</v-icon></v-list-item-icon>
+                    <v-list-item-title>Login</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="registerDialogFunc" v-if="id==null">
+                    <v-list-item-icon><v-icon>mdi-account-plus</v-icon></v-list-item-icon>
+                    <v-list-item-title>Register</v-list-item-title>
+                </v-list-item>
+                <v-list-item link @click="logout" v-if="id!=null">
+                    <v-list-item-icon><v-icon>mdi-logout</v-icon></v-list-item-icon>
+                    <v-list-item-title>Logout</v-list-item-title>
+                </v-list-item>
+            </v-list>
+        </v-navigation-drawer>
         <!-- Cart -->
-        <v-navigation-drawer fixed temporary right v-model="cart" v-if="!this.$route.meta.auth" :width="$vuetify.breakpoint.smAndDown?'200px':'400px'" >
+        <v-navigation-drawer fixed temporary right v-model="cart" v-if="!this.$route.meta.auth" :width="$vuetify.breakpoint.smAndDown?'300px':'400px'" >
             <v-layout justify-space-between column fill-height class="pa-2 pt-6">
                 <div>
                     <template>
@@ -310,7 +360,7 @@ export default {
             searchOverlay: false,
             loginDialog: false,
             registerDialog: false,
-            drawer: null,
+            drawer: false,
             cart: false,
             products: this.$store.state.product.products,
             id:this.$store.state.user.id,

@@ -26,6 +26,38 @@
                         </v-navigation-drawer>
                     </v-card>
                 </v-col>
+                <v-btn v-else fab dark large color="secondary" fixed right bottom class="mr-3 mb-2" @click="filterMenu = !filterMenu">
+                    <v-icon>mdi-filter-menu</v-icon>
+                </v-btn>
+                <v-dialog max-width="1000px" v-model="filterMenu">
+                    <v-card>
+                        <v-toolbar dense flat dark color="secondary">
+                            <span class="title font-weight-light">Cari Sesuai Kebutuhanmu</span>
+                            <v-btn absolute right icon @click="filterMenu = !filterMenu"><v-icon>mdi-close</v-icon></v-btn>
+                        </v-toolbar>
+                        <v-card-text class="my-7">
+                            <v-col cols="12">
+                                <v-text-field class="" color="secondary" outlined dense label="Search Here" v-model="search.search" :clearable="true" @click:clear="search.search=null">
+                                    <template v-slot:prepend-inner><v-icon class="mr-2 secondary--text">mdi-magnify</v-icon></template>
+                                </v-text-field>
+                            </v-col>
+                            <v-col cols="12" class="">
+                                <v-select :items="skinTypes" item-text="name" item-value="id"  class="mb-n5" color="secondary" outlined dense label="Skin Type" v-model="search.skinType" :clearable="true" @click:clear="search.skinType=null">
+                                    <template v-slot:prepend-inner><v-icon class="mr-2 secondary--text">mdi-face-woman</v-icon></template>
+                                </v-select>
+                            </v-col>
+                        </v-card-text>
+                        <v-card-actions>
+                            <v-container>
+                                <v-row justify="center">
+                                    <v-btn large class="mt-n8" color="secondary darken-1 white--text" @click="filterMenu = !filterMenu">
+                                        <span>Close</span>
+                                    </v-btn>
+                                </v-row>
+                            </v-container>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
                 <v-col cols="12" sm="12" md="9" class="pl-md-16">
                     <v-data-table
                         :headers="header"
@@ -127,6 +159,7 @@ export default {
                 {id:"3", name:"Make me dewy! - Dry skin"},
                 {id:"4", name:"Acne go away! - Acne prone"}
             ],
+            filterMenu: false,
             products:[],
             pagination: {
                 page:1,

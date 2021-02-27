@@ -1,6 +1,6 @@
 <template>
     <v-main>
-        <v-container fluid fill-height class="pt-10 px-md-16">
+        <v-container fluid fill-height class="py-10 px-md-16">
             <v-row no-gutters align="center">
                 <v-col cols="12" md="8">
                     <div class="display-1">ABOUT US</div>
@@ -17,14 +17,20 @@
                 </v-col>
             </v-row>
         </v-container>
+        <whatsapp-floating-button></whatsapp-floating-button>
     </v-main>
 </template>
 
 <script>
 // importing stuff
-
+import WhatsappFloatingButton from '@/components/WhatsAppFloatingButton.vue'
 
 export default {
+
+    components: {
+        WhatsappFloatingButton
+    },
+
     data() {
         return {
 
