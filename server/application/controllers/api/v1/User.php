@@ -68,7 +68,7 @@ class User extends RestController {
                 // Creating unique ID
                 // Using do while instead of while do to reducing declaration
                 do {
-                    $id = bin2hex(random_bytes(16));
+                    $id = bin2hex(random_bytes(8));
                 } while($this->UserModel->id_exist($id));
 
                 // Check if username exist
@@ -92,7 +92,7 @@ class User extends RestController {
                 // False Status
                 $this->response(
                     array(
-                        "status" => TRUE,
+                        "status" => FALSE,
                         "message" => $this::INSERT_FAILED
                     ), $this::HTTP_INTERNAL_ERROR
                 );

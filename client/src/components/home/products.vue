@@ -80,7 +80,7 @@ export default {
     display: block;
     width: 130px;
     height: 5px;
-    background: #FFF2CC;
+    background: #819C4B;
     margin: 10px 0;
     left: 0;
 }

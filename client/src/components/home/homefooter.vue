@@ -35,7 +35,7 @@
                         class="mr-3"
                     >
                     </v-text-field>
-                    <v-btn class="primary black--text">Subscribe</v-btn>
+                    <v-btn class="secondary">Subscribe</v-btn>
                 </div>
                 <div class="mt-n3">Will update you with news & product!</div>
             </v-col>
